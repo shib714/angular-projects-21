@@ -1,0 +1,74 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title> {{pageHeader()}}</mat-card-title>
+    </mat-card-header>
+    <form>
+        <mat-card-content>
+            <div class="row">
+
+                <mat-form-field appearance="outline">
+                    <mat-label class="row-label">First Name</mat-label>
+                    <input id="firstNameId" matInput [field]="subscribeForm.firstName"
+                        placeholder="Please enter your first name" />
+                    <mat-hint>First Name (optional)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input id="lastNameId" matInput [field]="subscribeForm.lastName"
+                        placeholder="Please enter your last name" />
+                    <mat-hint>Last Name (optional)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input id="emailId" matInput [field]="subscribeForm.email" placeholder="Please enter your email" />
+                    <mat-hint>Email (required)</mat-hint>
+                </mat-form-field>
+                @if (subscribeForm.email().invalid() && subscribeForm.email().touched()) {
+                <div class="alert alert-danger">
+                    @for (error of subscribeForm.email().errors(); track error.kind) {
+                    <div>{{ error.message }}</div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Years as a Fan</mat-label>
+                    <input id="yearsAsFanId" matInput type="number" [field]="subscribeForm.yearsAsFan"
+                        placeholder="How many years have you been a Star Wars fan?" />
+
+                </mat-form-field>
+                @if (subscribeForm.yearsAsFan().invalid() && subscribeForm.yearsAsFan().touched()) {
+                <div class="alert alert-danger">
+                    @for (error of subscribeForm.yearsAsFan().errors(); track error.kind) {
+                    <div>{{ error.message }}</div>
+                    }
+                </div>
+                }
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="row">
+                <div class="row-value">
+                    <button mat-flat-button type="button" [disabled]="subscribeForm().invalid()" (click)="subscribe()">
+                        Subscribe
+                    </button>
+                    <button mat-flat-button type="button" (click)="cancel()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </mat-card-actions>
+
+    </form>
+
+    @if (subscribeMessage()) {
+    <div class="alert alert-success">
+        {{ subscribeMessage() }}
+    </div>
+    }
+</mat-card>
