@@ -6,10 +6,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'subscribe-form',
-  imports: [Field, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule],
+  imports: [Field, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCheckboxModule],
   templateUrl: './subscribe-form.html',
   styleUrl: './subscribe-form.scss',
 })
