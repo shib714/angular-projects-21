@@ -31,8 +31,22 @@ form {
 mat-form-field {
   .mat-mdc-form-field-error {
     margin-top: 0;
+    // background-color: #f8d7da;
+    // color: #721c24;
+    // padding: 0.5rem;
+    // border-radius: 4px;
+    // margin-bottom: 0.5rem;
   }
 }
+
+// mat-checkbox mat-error {
+//   text-align: left;
+//   background-color: #f8d7da;
+//   color: #721c24;
+//   padding: 0.5rem;
+//   border-radius: 4px;
+//   margin-top: 0.5rem;
+// }
 
 .row-label {
   padding: 3px;

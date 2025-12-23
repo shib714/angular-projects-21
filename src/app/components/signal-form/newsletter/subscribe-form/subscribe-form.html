@@ -53,8 +53,14 @@
                     Send via email
                 </mat-checkbox>
             </div>
-            <div class="row"><mat-checkbox id="sendViaTextId" [field]="subscribeForm.sendViaText">
+            <div class="row">
+                <mat-checkbox id="sendViaTextId" [field]="subscribeForm.sendViaText">
                     Send via text
+                    <mat-error>
+                        @for (error of subscribeForm.sendViaText().errors(); track error.kind) {
+                        <div>{{ error.message }}</div>
+                        }
+                    </mat-error>
                 </mat-checkbox>
             </div>
             <div class="row">
