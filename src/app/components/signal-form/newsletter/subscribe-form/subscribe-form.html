@@ -5,9 +5,8 @@
     <form>
         <mat-card-content>
             <div class="row">
-
                 <mat-form-field appearance="outline">
-                    <mat-label class="row-label">First Name</mat-label>
+                    <mat-label>First Name</mat-label>
                     <input id="firstNameId" matInput [field]="subscribeForm.firstName"
                         placeholder="Please enter your first name" />
                     <mat-hint>First Name (optional)</mat-hint>
@@ -25,7 +24,6 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
                     <input id="emailId" matInput [field]="subscribeForm.email" placeholder="Please enter your email" />
-
                     @if (subscribeForm.email().invalid() && subscribeForm.email().touched()) {
                     <mat-error>
                         @for (error of subscribeForm.email().errors(); track error.kind) {
@@ -40,7 +38,6 @@
                     <mat-label>Phone</mat-label>
                     <input id="phoneId" matInput [field]="subscribeForm.phone"
                         placeholder="Please enter your cell phone number" />
-
                     <mat-error>
                         @for (error of subscribeForm.phone().errors(); track error.kind) {
                         <div>{{ error.message }}</div>
@@ -65,7 +62,7 @@
             </div>
             <div class="row">
                 <mat-form-field appearance="outline">
-                    <mat-label>Years as a Fan</mat-label>
+                    <mat-label>Years as a fan</mat-label>
                     <input id="yearsAsFanId" matInput type="number" [field]="subscribeForm.yearsAsFan"
                         placeholder="How many years have you been a Star Wars fan?" />
                     <mat-error>
@@ -77,20 +74,16 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <div class="row">
-                <div class="row-value">
-                    <button mat-flat-button type="button" [disabled]="subscribeForm().invalid()" (click)="subscribe()">
-                        Subscribe
-                    </button>
-                    <button mat-flat-button type="button" (click)="cancel()">
-                        Cancel
-                    </button>
-                </div>
+            <div class="flex-row">
+                <button mat-flat-button type="button" [disabled]="subscribeForm().invalid()" (click)="subscribe()">
+                    Subscribe
+                </button>
+                <button mat-flat-button type="button" (click)="cancel()">
+                    Cancel
+                </button>
             </div>
         </mat-card-actions>
-
     </form>
-
     @if (subscribeMessage()) {
     <div class="alert alert-success">
         {{ subscribeMessage() }}
