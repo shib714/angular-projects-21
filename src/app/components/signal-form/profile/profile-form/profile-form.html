@@ -1,0 +1,111 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>User Profile</mat-card-title>
+    </mat-card-header>
+    <form>
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input id="firstNameId" matInput [field]="profileForm.firstName"
+                        placeholder="Please enter your first name" />
+                    <mat-hint>First Name (optional)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.firstName()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input id="lastNameId" matInput [field]="profileForm.lastName"
+                        placeholder="Please enter your last name" />
+                    <mat-hint>Last Name (optional)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.lastName()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input id="dateOfBirthId" matInput [matDatepicker]="picker" [field]="profileForm.dateOfBirth"
+                        placeholder="Please enter your date of birth" (dateChange)="onDateChange($event)" />
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.dateOfBirth()"></field-error>
+                    </mat-error>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input id="passwordId" matInput [field]="profileForm.password"
+                        placeholder="Please enter your password" />
+                    <mat-hint>Password (required)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.password()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm password</mat-label>
+                    <input id="confirmPasswordId" matInput [field]="profileForm.confirmPassword"
+                        placeholder="Please confirm your password" />
+                    <mat-hint>Confirm password (required)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.confirmPassword()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+            <h2>Additional Information</h2>
+            <div class="row">
+                <mat-checkbox id="sendViaEmailId" [field]="profileForm.hasEmergencyContact">
+                    I have an emergency contact
+                </mat-checkbox>
+
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Emergency Contact Name</mat-label>
+                    <input id="emergencyContactNameId" matInput [field]="profileForm.emergencyContactName"
+                        placeholder="Enter emergency contact name" />
+                    <mat-hint>Emergency Contact Name (optional)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.emergencyContactName()"></field-error>
+                    </mat-error>
+
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Emergency Contact Phone</mat-label>
+                    <input id="emergencyContactPhoneId" matInput [field]="profileForm.emergencyContactPhone"
+                        placeholder="Enter emergency contact phone number" />
+                    <mat-hint>Emergency Contact Phone (optional)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.emergencyContactPhone()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <div class="flex-row">
+                <button mat-flat-button type="button" [disabled]="profileForm().invalid()" (click)="saveProfile()">
+                    Save Profile
+                </button>
+                <button mat-flat-button type="button" (click)="cancel()">
+                    Cancel
+                </button>
+            </div>
+        </mat-card-actions>
+
+    </form>
+
+
+</mat-card>

@@ -19,4 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('./components/signal-form/newsletter/subscribe-form/subscribe-form')
             .then((m) => m.SubscribeForm), title: 'Subscribe Signal Form'
     },
+
+        {
+        path: 'profile-form',
+        loadComponent: () => import('./components/signal-form/profile/profile-form/profile-form')
+            .then((m) => m.ProfileForm), title: 'Profile Signal Form'
+    },
 ];

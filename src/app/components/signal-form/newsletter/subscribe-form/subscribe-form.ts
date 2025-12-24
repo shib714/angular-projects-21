@@ -1,6 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { initialData, Subscription, subscriptionSchema } from '../subscription';
-import { Field, form, submit } from '@angular/forms/signals';
+import { Field, form, submit} from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,7 +26,7 @@ export class SubscribeForm {
   fullName = computed(() => `${this.subscribeModel().firstName} ${this.subscribeModel().lastName}`);
   pageHeader = computed(() => `Subscribe to our Newsletter ${this.fullName()}`);
 
-    cancel() {
+  cancel() {
     // Reset form (or navigate to another page)
     this.subscribeForm().reset(initialData);
   }
@@ -47,6 +47,32 @@ export class SubscribeForm {
 
   eff = effect(() =>
     console.log('Email:', this.subscribeModel().email));
+
+
+
+
+  /**a
+   * protected onSubmit(event: Event) {   
+   * submit(this.signupForm, async (form) => {
+   * try{
+   * await fetch('http://dummyjson.com/usurs/2', {
+   * method : 'PUT',
+   * body: JSON.stringify(form().value()),
+   * });
+   * return undefined;
+   * } catch(e) {
+   *  return [{
+   * kind: 'server',
+   * field: form.email,
+   * 
+   * message: (e as Error).message}]
+   * }
+   * from.reset();
+   * }0
+   * event.preventDefault();
+   * }
+   * }
+   */
 
 
 }
