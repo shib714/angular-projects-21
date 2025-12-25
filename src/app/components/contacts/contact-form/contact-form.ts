@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, inject } from "@angular/core";
+import { Component, ChangeDetectionStrategy, signal, inject, OnInit } from "@angular/core";
 import { Field, form, submit } from "@angular/forms/signals";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -34,7 +34,7 @@ import { ContactsService } from "../service/contacts.service";
     styleUrl: './contact-form.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactForm {
+export class ContactForm implements OnInit {
 
     isEditMode = signal(false);
     isSubmitting = signal(false);
@@ -46,6 +46,12 @@ export class ContactForm {
     contactFormModel = signal<ContactModel>(defaultContactModel);
 
     contactForm = form(this.contactFormModel, contactSchema);
+
+    ngOnInit(): void {
+        this.contactForm().reset(defaultContactModel);
+        this.checkEditMode();
+    }
+
 
     private checkEditMode(): void {
         const contactId = this.route.snapshot.paramMap.get('id');
@@ -68,13 +74,16 @@ export class ContactForm {
         }
     }
 
+      cancel() {
+        // Reset form (or navigate to another page)
+        this.router.navigate(['/contacts']);
+      }
 
     saveContact() {
         //this.subscribeMessage.set('');
         submit(this.contactForm, () =>
             this.onSubmit());
     }
-
 
     async onSubmit() {
         // Submit to the server
@@ -92,7 +101,6 @@ export class ContactForm {
                 this.contactsService.addContact(formValue);
                 this.snackBar.open('Contact added successfully', 'Close', { duration: 3000 });
             }
-
             this.isSubmitting.set(false);
             // Reset form (or navigate to another page)
             //this.contactForm().reset(defaultContactModel);

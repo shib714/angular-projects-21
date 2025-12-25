@@ -22,7 +22,7 @@ import { ContactModel } from '../models/contact-model';
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-raised-button color="warn" [mat-dialog-close]="true">Delete</button>
+      <button mat-raised-button class="warn" [mat-dialog-close]="true">Delete</button>
     </mat-dialog-actions>
   `,
   styles: [`

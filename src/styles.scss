@@ -36,3 +36,9 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+.accent {
+    @include mat.theme((color: mat.$magenta-palette, ));
+}
+.warn {
+    @include mat.theme((color: mat.$red-palette, ));
+}

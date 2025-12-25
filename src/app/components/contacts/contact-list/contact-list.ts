@@ -16,7 +16,7 @@ import { Contact } from '../contact/contact';
 
 
 @Component({
-  selector: 'contact-list',
+  selector: 'contacts',
   imports: [
     CommonModule,
     RouterModule,

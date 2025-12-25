@@ -79,12 +79,17 @@
             </mat-card-content>
             <mat-card-actions>
                 <div class="form-actions">
-                    <button type="button" mat-button routerLink="/contacts" class="cancel-button">
+                    <!-- <button type="button" mat-button routerLink="/contacts" class="cancel-button">
+                        <mat-icon>arrow_back</mat-icon>
+                        Cancel
+                    </button> -->
+                    <button type="button" mat-button (click)="cancel()" class="cancel-button">
                         <mat-icon>arrow_back</mat-icon>
                         Cancel
                     </button>
                     <button type="button" mat-raised-button color="primary"
-                        [disabled]="contactForm().invalid() || isSubmitting()" (click)="saveContact()" class="submit-button">
+                        [disabled]="contactForm().invalid() || isSubmitting()" (click)="saveContact()"
+                        class="submit-button">
                         <mat-icon>{{ isEditMode() ? 'save' : 'add' }}</mat-icon>
                         {{ isEditMode() ? 'Update Contact' : 'Add Contact' }}
                     </button>
