@@ -18,7 +18,7 @@ import { FieldError } from './field-error';
     FieldError,
     MatButtonModule, 
     MatCardModule, 
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule, 
     MatIconModule, 
     MatCheckboxModule, 

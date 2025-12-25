@@ -1,4 +1,4 @@
-import { applyWhen, minLength, required, schema, validate } from "@angular/forms/signals";
+import { apply, applyWhen, disabled, minLength, required, schema, validate } from "@angular/forms/signals";
 
 export interface Profile {
     firstName: string,
@@ -23,24 +23,15 @@ export const defaultProfile: Profile = {
 }
 
 export const profileSchema = schema<Profile>((rootPath) => {
-    required(rootPath.firstName, {message: 'First name is required'});
-    required(rootPath.lastName, {message: 'Last name is required'});
-    required(rootPath.password, {message: 'Password is required'});
-    required(rootPath.confirmPassword, {message: 'Confirm password is required'});
-    minLength(rootPath.password, 8, {message: 'Password should be at least 8 characters long'});
-    minLength(rootPath.confirmPassword, 8, {message: 'Confirm password should be at least 8 characters long'}); 
-    validate(rootPath.confirmPassword, (ctx) => {
-        if(!ctx.value()) return null;
-        const password = ctx.valueOf(rootPath.password);
-        if(password !== ctx.value()) {
-            return {
-                kind: 'passwordMismatch',
-                message: 'Passwords do not match'
-            }
-        }
-        return null;
-    });
-        
+    required(rootPath.firstName, { message: 'First name is required' });
+    required(rootPath.lastName, { message: 'Last name is required' });
+
+    apply(rootPath, passwordSchema);
+    apply(rootPath, dateOfBirthSchema);
+    apply(rootPath, hasEmergencyContactSchema);
+});
+
+const dateOfBirthSchema = schema<{ dateOfBirth: string }>((rootPath) => {
     required(rootPath.dateOfBirth, { message: 'Date of birth is required' });
     validate(rootPath.dateOfBirth, (ctx) => {
         if (!ctx.value()) return null;
@@ -60,7 +51,28 @@ export const profileSchema = schema<Profile>((rootPath) => {
         }
         return null;
     });
+});
 
+
+const passwordSchema = schema<{ password: string, confirmPassword: string }>((rootPath) => {
+    required(rootPath.password, { message: 'Password is required' });
+    required(rootPath.confirmPassword, { message: 'Confirm password is required' });
+    minLength(rootPath.password, 8, { message: 'Password should be at least 8 characters long' });
+    minLength(rootPath.confirmPassword, 8, { message: 'Confirm password should be at least 8 characters long' });
+    validate(rootPath.confirmPassword, (ctx) => {
+        if (!ctx.value()) return null;
+        const password = ctx.valueOf(rootPath.password);
+        if (password !== ctx.value()) {
+            return {
+                kind: 'passwordMismatch',
+                message: 'Passwords do not match'
+            }
+        }
+        return null;
+    });
+});
+
+const hasEmergencyContactSchema = schema<{ hasEmergencyContact: boolean, emergencyContactName: string, emergencyContactPhone: string }>((rootPath) => {
     // When hasEmergencyContact is true, make the contact name and phone required.
     required(rootPath.emergencyContactName, {
         message: 'Emergency contact name is required',
@@ -80,5 +92,9 @@ export const profileSchema = schema<Profile>((rootPath) => {
             minLength(field, 10, { message: 'Phone number should be at least 10 characters long' });
         }
     );
-
+    disabled(rootPath.emergencyContactName, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
+    disabled(rootPath.emergencyContactPhone, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
 });
+
+
+
