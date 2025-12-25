@@ -1,4 +1,4 @@
-import { schema } from "@angular/forms/signals";
+import { schema, required, email, minLength} from "@angular/forms/signals";
 
 export interface ContactModel {
     id: string;
@@ -27,4 +27,11 @@ export const defaultContactModel: ContactModel = {
 }
 
 export const contactSchema = schema<ContactModel>((rootPath) => {
+    required(rootPath.firstName, { message: 'First name is required' });
+    required(rootPath.lastName, { message: 'Last name is required' });
+    required(rootPath.email, { message: 'Email is required' });
+    required(rootPath.phone, { message: 'Phone is required' });
+    email(rootPath.email, {message: 'Please enter a valid email address'});
+    minLength(rootPath.email, 6, {message: 'Email should be at least 6 characters long'});
 });
+
