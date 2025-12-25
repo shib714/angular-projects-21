@@ -24,6 +24,10 @@
               {{ contactModel().mobile ? 'Mobile' : 'Landline' }}
             </mat-chip>
           </div>
+          <div class="info-item">
+            <mat-icon>date_range</mat-icon>
+            <span>{{ contactModel().createdAt | date: 'fullDate'}}</span>
+          </div>
           @if (contactModel().notes) {
             <div class="info-item">
               <mat-icon>note</mat-icon>
