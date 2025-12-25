@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { FieldError } from './field-error';
+import { FieldError } from '../../../../common/utils/field-error';
 
 @Component({
   selector: 'profile-form',

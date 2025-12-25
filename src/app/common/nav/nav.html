@@ -46,6 +46,15 @@
             </mat-list-item>
             <mat-divider></mat-divider>
         </mat-list>
+
+        <mat-list role="list">
+            <mat-list-item routerLink="contacts" routerLinkActive="active">
+                <mat-icon>contacts</mat-icon> Contacts</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+
+
+
     </mat-drawer>
     <mat-drawer-content class="app-container" (click)="drawer.close()">
         <main class="app-content">
