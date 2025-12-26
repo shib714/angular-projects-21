@@ -1,6 +1,17 @@
-import { apply, applyWhen, disabled, minLength, required, schema, validate } from "@angular/forms/signals";
+import { resource } from "@angular/core";
+import { apply, applyWhen, customError, debounce, disabled, minLength, required, schema, validate, validateAsync } from "@angular/forms/signals";
 
+
+function checkUserNameAvailability(userName: string): Promise<boolean> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const taken = ['admin', 'test', 'developer'];
+            resolve(!taken.includes(userName));
+        }, 1000);
+    });
+}
 export interface Profile {
+    userName: string,
     firstName: string,
     lastName: string,
     dateOfBirth: string,
@@ -12,6 +23,7 @@ export interface Profile {
 }
 
 export const defaultProfile: Profile = {
+    userName: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -23,6 +35,36 @@ export const defaultProfile: Profile = {
 }
 
 export const profileSchema = schema<Profile>((rootPath) => {
+    required(rootPath.userName, { message: 'User name is required' });
+    debounce(rootPath.userName, 500);
+    validateAsync(rootPath.userName, {
+        params: ({ value }) => {
+            const val = value();
+            if (!val || val.length < 4) return undefined;
+            return val;
+        },
+        factory: username =>
+            resource({
+                params: username,
+                loader: async ({ params: username }) => {
+                    const available = await checkUserNameAvailability(username);
+                    return available;
+                }
+            }),
+        onSuccess: (result: boolean) => {
+            if (!result) {
+                return customError({
+                    kind: 'username_taken',
+                    message: 'This username is already taken',
+                });
+            }
+            return null;
+        },
+        onError: (error: unknown) => {
+            console.error('Validation error:', error);
+            return null;
+        }
+    });
     required(rootPath.firstName, { message: 'First name is required' });
     required(rootPath.lastName, { message: 'Last name is required' });
 
@@ -95,6 +137,7 @@ const hasEmergencyContactSchema = schema<{ hasEmergencyContact: boolean, emergen
     disabled(rootPath.emergencyContactName, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
     disabled(rootPath.emergencyContactPhone, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
 });
+
 
 
 

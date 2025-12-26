@@ -14,14 +14,14 @@ import { FieldError } from './field-error';
 @Component({
   selector: 'profile-form',
   imports: [
-    Field, 
+    Field,
     FieldError,
-    MatButtonModule, 
-    MatCardModule, 
+    MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
-    MatInputModule, 
-    MatIconModule, 
-    MatCheckboxModule, 
+    MatInputModule,
+    MatIconModule,
+    MatCheckboxModule,
     MatDatepickerModule,
   ],
   providers: [provideNativeDateAdapter()],
@@ -35,7 +35,7 @@ export class ProfileForm {
 
   profileForm = form(this.profileFormModel, profileSchema);
 
-  
+
   cancel() {
     // Reset form (or navigate to another page)
     this.profileForm().reset(defaultProfile);
@@ -47,12 +47,12 @@ export class ProfileForm {
       this.onSubmit());
   }
 
-    async onSubmit() {     
-      // Submit to the server
-      console.log('Submitting data to server:', this.profileForm().value());
-      // Reset form (or navigate to another page)
-       this.profileForm().reset(defaultProfile);
-    }
+  async onSubmit() {
+    // Submit to the server
+    console.log('Submitting data to server:', this.profileForm().value());
+    // Reset form (or navigate to another page)
+    this.profileForm().reset(defaultProfile);
+  }
 
   onDateChange(event: MatDatepickerInputEvent<Date>): void {
     const selectedDate = event.value;
@@ -70,4 +70,6 @@ export class ProfileForm {
       }));
     }
   }
+
+
 }

@@ -6,6 +6,17 @@
         <mat-card-content>
             <div class="field-row">
                 <mat-form-field appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input id="userNameId" matInput [field]="profileForm.userName"
+                        placeholder="Please enter your user name" />
+                    <mat-hint>User Name (required)</mat-hint>
+                    <mat-error>
+                        <field-error [fieldState]="profileForm.userName()"></field-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field-row">
+                <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
                     <input id="firstNameId" matInput [field]="profileForm.firstName"
                         placeholder="Please enter your first name" />
@@ -31,7 +42,7 @@
                     <mat-label>Date of Birth</mat-label>
                     <input id="dateOfBirthId" matInput [matDatepicker]="picker" [field]="profileForm.dateOfBirth"
                         placeholder="Please enter your date of birth" (dateChange)="onDateChange($event)" />
-                         <mat-hint>Date of Birth (required)</mat-hint>
+                    <mat-hint>Date of Birth (required)</mat-hint>
                     <mat-error>
                         <field-error [fieldState]="profileForm.dateOfBirth()"></field-error>
                     </mat-error>
