@@ -15,7 +15,7 @@
                     <mat-form-field appearance="outline" class="form-field">
                         <mat-label>First Name</mat-label>
                         <input id="firstNameId" matInput [field]="contactForm.firstName"
-                            placeholder="Please enter your first name" />
+                            placeholder="Please enter your first name" autocomplete="off" />
                         <mat-hint>First Name (required)</mat-hint>
                         <mat-error>
                             <field-error [fieldState]="contactForm.firstName()"></field-error>
@@ -26,7 +26,7 @@
                     <mat-form-field appearance="outline" class="form-field">
                         <mat-label>Last Name</mat-label>
                         <input id="lastNameId" matInput [field]="contactForm.lastName"
-                            placeholder="Please enter your last name" />
+                            placeholder="Please enter your last name" autocomplete="off"/>
                         <mat-hint>Last Name (required)</mat-hint>
                         <mat-error>
                             <field-error [fieldState]="contactForm.lastName()"></field-error>
@@ -37,7 +37,7 @@
                     <mat-form-field appearance="outline" class="form-field">
                         <mat-label>Email</mat-label>
                         <input id="emailId" matInput [field]="contactForm.email"
-                            placeholder="Please enter your email" />
+                            placeholder="Please enter your email" autocomplete="off"/>
                         <mat-hint>Email (required)</mat-hint>
                         <mat-error>
                             <field-error [fieldState]="contactForm.email()"></field-error>
@@ -48,7 +48,7 @@
                     <mat-form-field appearance="outline" class="form-field">
                         <mat-label>Phone</mat-label>
                         <input id="phoneId" matInput [field]="contactForm.phone"
-                            placeholder="Please enter your phone number" />
+                            placeholder="Please enter your phone number" autocomplete="off"/>
                         <mat-hint>Phone (required)</mat-hint>
                         <mat-error>
                             <field-error [fieldState]="contactForm.phone()"></field-error>
@@ -59,7 +59,7 @@
                     <mat-form-field appearance="outline" class="form-field">
                         <mat-label>Company</mat-label>
                         <input id="companyId" matInput [field]="contactForm.company"
-                            placeholder="Please enter your company" />
+                            placeholder="Please enter your company" autocomplete="off"/>
                         <mat-hint>Company (optional)</mat-hint>
                     </mat-form-field>
                 </div>
