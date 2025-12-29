@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { environment } from '../../../../environments/env.dev';
 
 @Injectable({
     providedIn: 'root',
@@ -7,7 +8,8 @@ export class UserService {
 
     // For larger applications, it's a good practice to store base URLs 
     // in environment-specific configuration files (e.g., environment.ts).
-    private readonly url = 'https://jsonplaceholder.typicode.com/users';
+    //private readonly url = 'https://jsonplaceholder.typicode.com/users';
+    private readonly url: string = environment.BASE_URL; 
 
     async checkUsernameAvailability(username: string): Promise<boolean> {
         try {
