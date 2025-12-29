@@ -3,36 +3,39 @@ import { schema, validateAsync, customError, required, debounce } from "@angular
 import { UserService } from "./user.service";
 
 export const userNameSchema = schema<{ userName: string }>((rootPath) => {
+    // In a larger application, you might want to pass the UserService
+    // instance to this function instead of creating a new one here.
+    // This would make your schema more testable.
     const userService = new UserService();
     required(rootPath.userName, { message: 'User name is required' });
     debounce(rootPath.userName, 500);
 
     validateAsync(rootPath.userName, {
         params: ({ value }) => {
-            const val = value();
-            if (!val || val.length < 4) return undefined;
-            return val;
+            const username = value()?.trim();
+            // Only trigger validation if the username is at least 4 characters long.
+            return username && username.length >= 4 ? username : undefined;
         },
-        factory: username =>
+        factory: (username) =>
             resource({
                 params: username,
-                loader: async ({ params: username }) => {
-                    const available = await userService.checkUsernameAvailability(username);
-                    return available;
-                }
+                loader: ({ params }) => userService.checkUsernameAvailability(params),
             }),
-        onSuccess: (result: boolean) => {
-            if (!result) {
-                return customError({
-                    kind: 'username_taken',
-                    message: 'This username is already taken',
-                });
-            }
-            return null;
+        onSuccess: (isAvailable) => {
+            // If the username is not available, return a custom error.
+            return isAvailable ? null : customError({
+                kind: 'username_taken',
+                message: 'This username is already taken',
+            });
         },
         onError: (error: unknown) => {
             console.error('Validation error:', error);
-            return null;
+            // In a real application, you might want to return a generic
+            // error message to the user instead of just logging the error.
+            return customError({
+                kind: 'validation_error',
+                message: 'Could not validate username.',
+            });
         }
     });
 });
