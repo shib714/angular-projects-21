@@ -42,4 +42,6 @@ export const routes: Routes = [
         loadComponent: () => import('./components/contacts/contact-form/contact-form')
             .then(m => m.ContactForm), title: 'Edit Contact'
     },
+      { path: 'sw-app', loadComponent: () => import ('./components/swapi-vehicles/vehicles/vehicle-app').then((m) => m.VehiclesApp), title: 'SW Vehicles' },
+
 ];
