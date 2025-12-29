@@ -11,7 +11,7 @@
                         placeholder="Please enter your user name" />
                     <mat-hint>User Name (required)</mat-hint>
                     @if(profileForm.userName().pending()) {
-                    <span class="checking">Checking availability...</span>
+                        <span class="checking">Checking availability...</span>
                     }@else {
                     <mat-error>
                         <field-error [fieldState]="profileForm.userName()"></field-error>

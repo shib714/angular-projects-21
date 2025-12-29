@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Field, form, submit } from '@angular/forms/signals';
 import { Profile, defaultProfile, profileSchema } from '../profile';
 import { MatCardModule } from '@angular/material/card';
@@ -10,18 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FieldError } from '../../../../common/utils/field-error';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'profile-form',
   imports: [
-    Field, 
+    Field,
     FieldError,
-    MatButtonModule, 
-    MatCardModule, 
+    MatButtonModule,
+    MatCardModule,
     MatFormFieldModule,
-    MatInputModule, 
-    MatIconModule, 
-    MatCheckboxModule, 
+    MatInputModule,
+    MatIconModule,
+    MatCheckboxModule,
     MatDatepickerModule,
   ],
   providers: [provideNativeDateAdapter()],
@@ -30,12 +31,15 @@ import { FieldError } from '../../../../common/utils/field-error';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileForm {
+  private readonly userService = inject(UserService);
 
   profileFormModel = signal<Profile>(defaultProfile);
 
-  profileForm = form(this.profileFormModel, profileSchema);
+  profileForm = form(this.profileFormModel, profileSchema(this.userService));
+  // Before:
+  // profileForm = form(this.profileFormModel, profileSchema);
 
-  
+
   cancel() {
     // Reset form (or navigate to another page)
     this.profileForm().reset(defaultProfile);
@@ -47,7 +51,7 @@ export class ProfileForm {
       this.onSubmit());
   }
 
-    async onSubmit() {     
+    async onSubmit() {
       // Submit to the server
       console.log('Submitting data to server:', this.profileForm().value());
       // Reset form (or navigate to another page)
@@ -71,3 +75,4 @@ export class ProfileForm {
     }
   }
 }
+

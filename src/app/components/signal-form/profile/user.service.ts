@@ -18,6 +18,7 @@ export class UserService {
                 throw new Error('Failed to check username availability');
             }
             const users = await response.json();
+            console.log('Available Users:', users);
             // The API returns an array of users that match the username.
             // If the array is empty, the username is available.
             return users.length === 0;

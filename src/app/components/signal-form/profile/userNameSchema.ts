@@ -2,13 +2,15 @@ import { resource } from "@angular/core";
 import { schema, validateAsync, customError, required, debounce } from "@angular/forms/signals";
 import { UserService } from "./user.service";
 
-export const userNameSchema = schema<{ userName: string }>((rootPath) => {
-    // In a larger application, you might want to pass the UserService
-    // instance to this function instead of creating a new one here.
-    // This would make your schema more testable.
-    const userService = new UserService();
+export const userNameSchema = (userService: UserService) => schema<{ userName: string }>((rootPath) => {
+      // Before:
+        // export const userNameSchema = schema<{ userName: string }>((rootPath) => {
+        //   const userService = new UserService();
+        //   ...
+        // });
+        //// It now uses the provided userService instance
     required(rootPath.userName, { message: 'User name is required' });
-    debounce(rootPath.userName, 500);
+    debounce(rootPath.userName, 1000);
 
     validateAsync(rootPath.userName, {
         params: ({ value }) => {
