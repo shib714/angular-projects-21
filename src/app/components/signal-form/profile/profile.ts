@@ -1,6 +1,9 @@
-import { apply, applyWhen, disabled, minLength, required, schema, validate } from "@angular/forms/signals";
+import { resource } from "@angular/core";
+import { apply, applyWhen, customError, debounce, disabled, minLength, required, schema, validate, validateAsync } from "@angular/forms/signals";
+import { userNameSchema } from "./userNameSchema";
 
 export interface Profile {
+    userName: string,
     firstName: string,
     lastName: string,
     dateOfBirth: string,
@@ -12,6 +15,7 @@ export interface Profile {
 }
 
 export const defaultProfile: Profile = {
+    userName: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -23,9 +27,11 @@ export const defaultProfile: Profile = {
 }
 
 export const profileSchema = schema<Profile>((rootPath) => {
+
     required(rootPath.firstName, { message: 'First name is required' });
     required(rootPath.lastName, { message: 'Last name is required' });
 
+    apply(rootPath, userNameSchema);
     apply(rootPath, passwordSchema);
     apply(rootPath, dateOfBirthSchema);
     apply(rootPath, hasEmergencyContactSchema);
@@ -95,6 +101,5 @@ const hasEmergencyContactSchema = schema<{ hasEmergencyContact: boolean, emergen
     disabled(rootPath.emergencyContactName, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
     disabled(rootPath.emergencyContactPhone, ({ valueOf }) => !valueOf(rootPath.hasEmergencyContact));
 });
-
 
 
