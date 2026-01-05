@@ -48,8 +48,21 @@ export class ProfileForm {
   }
 
   async onSubmit() {
-    // Submit to the server
+    // Submit to the server: https://angular.love/signal-forms-in-angular-21-complete-guide
     console.log('Submitting data to server:', this.profileForm().value());
+    /**
+    // 1. At this point all fields are already marked as touched
+    // 2. If form is invalid - this function will NOT be called
+    // 3. form().submitting() === true during execution
+    const response = await api.save(form().value());    
+    // We can return server errors
+    if (response.error) {
+      return [{
+        field: myForm.email,
+        error: customError({ kind: 'server', message: response.error })
+      }];
+    }
+    **/    
     // Reset form (or navigate to another page)
     this.profileForm().reset(defaultProfile);
   }
