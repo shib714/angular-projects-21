@@ -112,8 +112,8 @@
 
         <mat-card-actions>
             <div class="flex-field-row">
-                <button mat-flat-button type="button" [disabled]="profileForm().invalid()" (click)="saveProfile()">
-                    Save Profile
+                <button mat-flat-button type="button" [disabled]="profileForm().invalid() || profileForm().submitting()" (click)="saveProfile()">
+                    {{profileForm().submitting() ? 'Sending....': 'Save Profile'}}
                 </button>
                 <button mat-flat-button type="button" (click)="cancel()">
                     Cancel
