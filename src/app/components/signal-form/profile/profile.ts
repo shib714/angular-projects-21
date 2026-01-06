@@ -36,6 +36,7 @@ export const defaultProfile: Profile = {
 
 export const profileSchema = schema<Profile>((rootPath) => {
     required(rootPath.userName, { message: 'User name is required' });
+    //Update model only 500ms after last change
     debounce(rootPath.userName, 500);
     validateAsync(rootPath.userName, {
         params: ({ value }) => {
