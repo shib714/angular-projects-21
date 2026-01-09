@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { FieldState } from '@angular/forms/signals';
 
 @Component({
-  selector: 'app-validation-errors',
+  selector: 'validation-errors',
   template: `
     @if (fieldState().touched() && fieldState().errors(); as errors) {
         @for (error of errors; track error) {
@@ -12,6 +12,6 @@ import { FieldState } from '@angular/forms/signals';
   `,
   styleUrls: ['./validation-errors.scss']
 })
-export class ValidationErrorsComponent {
+export class ValidationErrors {
   readonly fieldState = input.required<FieldState<unknown, string>>();
 }

@@ -3,7 +3,7 @@ import { FieldState } from '@angular/forms/signals';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-debug-panel',
+  selector: 'debug-panel',
   template: `
     <div class="debug">
     <h3>Debug Output</h3>
