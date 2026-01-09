@@ -35,9 +35,9 @@ export class ProfileForm {
 
   profileFormModel = signal<Profile>(defaultProfile);
 
-  profileForm = form(this.profileFormModel, profileSchema(this.userService));
-  // Before:
-  // profileForm = form(this.profileFormModel, profileSchema);
+  profileForm = form(this.profileFormModel, profileSchema);
+  //we can aslo inject userService if needed as below
+  //profileForm = form(this.profileFormModel, profileSchema(this.userService));
 
 
   cancel() {

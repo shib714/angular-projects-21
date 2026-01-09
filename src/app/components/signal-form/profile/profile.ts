@@ -1,7 +1,6 @@
-import { resource } from "@angular/core";
-import { apply, applyWhen, customError, debounce, disabled, minLength, required, schema, validate, validateAsync } from "@angular/forms/signals";
-import { userNameSchema } from "./userNameSchema";
+import { apply, applyWhen, customError, debounce, disabled, minLength, required, schema, validate, validateAsync, validateHttp } from "@angular/forms/signals";
 import { UserService } from "./user.service";
+import { environment } from "../../../../environments/env.dev";
 
 export interface Profile {
     userName: string,
@@ -27,22 +26,49 @@ export const defaultProfile: Profile = {
     emergencyContactPhone: '',
 }
 
-export const profileSchema = (userService: UserService) => schema<Profile>((rootPath) => {
+//export const profileSchema = (userService: UserService) => schema<Profile>((rootPath) => {
+export const profileSchema = schema<Profile>((rootPath) => {
 
-      // Before:
-      // export const profileSchema = schema<Profile>((rootPath) => {
-      //   apply(rootPath, userNameSchema);
-      //   ...
-      // });
     required(rootPath.firstName, { message: 'First name is required' });
     required(rootPath.lastName, { message: 'Last name is required' });
 
-    //after
     //apply(rootPath, userNameSchema(userService));
     apply(rootPath, userNameSchema);
     apply(rootPath, passwordSchema);
     apply(rootPath, dateOfBirthSchema);
     apply(rootPath, hasEmergencyContactSchema);
+});
+
+
+const userNameSchema = schema<{ userName: string }>((rootPath) => {
+    required(rootPath.userName, { message: 'User name is required' });
+    // validate(rootPath.userName, ({ value }) => {
+    //     const username = value();
+    //     if (!username.includes(' ')) {
+    //         return customError({ kind: 'no-spaces', message: 'Name cannot contain spaces' });
+    //     }
+    //     return undefined;//no erroe
+
+    // });
+
+    debounce(rootPath.userName, 300);
+
+    // we use validateHttp to check user availability
+    //this will eliminate the need for userService required for validateAsync
+    validateHttp(rootPath.userName, {
+        //request is a function that receives the field context and returns the url or request for the httpResource. 
+        // If given a URL, the underlying httpResource will perform an HTTP GET on it.
+        request: ({ value }) => {
+            //const username = value();
+            return value() ? `${environment.BASE_URL}?username=${value()}` : undefined
+        },
+        onSuccess: (users: any[]) =>
+            users.length > 0 ? customError({ kind: 'taken', message: 'This username is already taken' }) : undefined,
+        onError: () =>
+            customError({ kind: 'server-error', message: 'Error checking availability' })
+    });
+
+
 });
 
 const dateOfBirthSchema = schema<{ dateOfBirth: string }>((rootPath) => {
