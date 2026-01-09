@@ -1,5 +1,7 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { environment } from '../../../../environments/env.dev';
+import { HttpClient } from "@angular/common/http";
+import { Observable, map, catchError, throwError } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -9,8 +11,16 @@ export class UserService {
     // For larger applications, it's a good practice to store base URLs 
     // in environment-specific configuration files (e.g., environment.ts).
     //private readonly url = 'https://jsonplaceholder.typicode.com/users';
-    private readonly url: string = environment.BASE_URL; 
+    private readonly url: string = environment.BASE_URL;
 
+    
+    //promise based
+    // The implementation used an unnecessary `new Promise` and `setTimeout`.
+    // Since `async` functions automatically return a Promise, we can directly
+    // return the boolean result of the check. The `setTimeout` was likely for
+    // simulating network delay during development and is not needed in production.
+
+    //used in validateAsync in userNameSchema
     async checkUsernameAvailability(username: string): Promise<boolean> {
         try {
             const response = await fetch(`${this.url}?username=${username}`);
@@ -30,12 +40,24 @@ export class UserService {
             throw error;
         }
     }
+
+    //Using HttpClient
+    private http = inject(HttpClient);
+
+    checkUsernameExists(username: string): Observable<{taken: boolean}> {
+        return this.http.get<any[]>(`${this.url}?username=${username}`).pipe(
+            map(users => ({ taken: users.length > 0})),
+            catchError(error => {
+                console.error('Error checking username availability:', error);
+                return throwError(() => new Error('Failed to check username availability'));
+            })
+        );
+    }
+
+
 }
 
-// The previous implementation used an unnecessary `new Promise` and `setTimeout`.
-// Since `async` functions automatically return a Promise, we can directly
-// return the boolean result of the check. The `setTimeout` was likely for
-// simulating network delay during development and is not needed in production.
+
 
 // For Angular applications, it is recommended to use the `HttpClient` module
 // from `@angular/common/http` for making HTTP requests. It provides more

@@ -38,7 +38,8 @@ export const profileSchema = (userService: UserService) => schema<Profile>((root
     required(rootPath.lastName, { message: 'Last name is required' });
 
     //after
-    apply(rootPath, userNameSchema(userService));
+    //apply(rootPath, userNameSchema(userService));
+    apply(rootPath, userNameSchema);
     apply(rootPath, passwordSchema);
     apply(rootPath, dateOfBirthSchema);
     apply(rootPath, hasEmergencyContactSchema);
