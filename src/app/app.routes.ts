@@ -30,7 +30,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/contacts/contact-list/contact-list')
             .then(m => m.ContactList), title: 'Contacts'
     },
-    
+
     {
         path: 'contacts/new',
         loadComponent: () => import('./components/contacts/contact-form/contact-form')
@@ -42,6 +42,14 @@ export const routes: Routes = [
         loadComponent: () => import('./components/contacts/contact-form/contact-form')
             .then(m => m.ContactForm), title: 'Edit Contact'
     },
-      { path: 'sw-app', loadComponent: () => import ('./components/swapi-vehicles/vehicles/vehicle-app').then((m) => m.VehiclesApp), title: 'SW Vehicles' },
+    {
+        path: 'sw-app', loadComponent: () => import('./components/swapi-vehicles/vehicles/vehicle-app')
+            .then((m) => m.VehiclesApp), title: 'SW Vehicles'
+    },
+
+    {
+        path: 'composable-form', loadComponent: () => import('./components/signal-form/composable-form/composable-form')
+            .then((m) => m.ComposableForm), title: 'Composable signal Form'
+    },
 
 ];
