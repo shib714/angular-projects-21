@@ -9,11 +9,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/home/home')
             .then((m) => m.Home), title: 'Home'
     },
-    // {
-    //     path: 'dynamic-app',
-    //     loadComponent: () => import('./components/dynamic-component/dynamic-app')
-    //         .then((m) => m.DynamicApp), title: 'Dynamic Component'
-    // },
+    {
+        path: 'form-submission-example',
+        loadComponent: () => import('./components/signal-form-submission/form')
+            .then((m) => m.FormComponent), title: 'Signal Form SubmissionExample'
+    },
     {
         path: 'subscribe-form',
         loadComponent: () => import('./components/signal-form/newsletter/subscribe-form/subscribe-form')
