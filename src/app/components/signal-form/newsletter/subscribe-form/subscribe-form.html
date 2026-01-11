@@ -1,0 +1,92 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title> {{pageHeader()}}</mat-card-title>
+    </mat-card-header>
+    <form>
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input id="firstNameId" matInput [field]="subscribeForm.firstName"
+                        placeholder="Please enter your first name" />
+                    <mat-hint>First Name (optional)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input id="lastNameId" matInput [field]="subscribeForm.lastName"
+                        placeholder="Please enter your last name" />
+                    <mat-hint>Last Name (optional)</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input id="emailId" matInput [field]="subscribeForm.email" placeholder="Please enter your email" />
+                    @if (subscribeForm.email().invalid() && subscribeForm.email().touched()) {
+                    <mat-error>
+                        @for (error of subscribeForm.email().errors(); track error.kind) {
+                        <div>{{ error.message }}</div>
+                        }
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input id="phoneId" matInput [field]="subscribeForm.phone"
+                        placeholder="Please enter your cell phone number" />
+                    <mat-error>
+                        @for (error of subscribeForm.phone().errors(); track error.kind) {
+                        <div>{{ error.message }}</div>
+                        }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-checkbox id="sendViaEmailId" [field]="subscribeForm.sendViaEmail">
+                    Send via email
+                </mat-checkbox>
+            </div>
+            <div class="row">
+                <mat-checkbox id="sendViaTextId" [field]="subscribeForm.sendViaText">
+                    Send via text
+                    <mat-error>
+                        @for (error of subscribeForm.sendViaText().errors(); track error.kind) {
+                        <div>{{ error.message }}</div>
+                        }
+                    </mat-error>
+                </mat-checkbox>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Years as a fan</mat-label>
+                    <input id="yearsAsFanId" matInput type="number" [field]="subscribeForm.yearsAsFan"
+                        placeholder="How many years have you been a Star Wars fan?" />
+                    <mat-error>
+                        @for (error of subscribeForm.yearsAsFan().errors(); track error.kind) {
+                        <div>{{ error.message }}</div>
+                        }
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="flex-row">
+                <button mat-flat-button type="button" [disabled]="subscribeForm().invalid()" (click)="subscribe()">
+                    Subscribe
+                </button>
+                <button mat-flat-button type="button" (click)="cancel()">
+                    Cancel
+                </button>
+            </div>
+        </mat-card-actions>
+    </form>
+    @if (subscribeMessage()) {
+    <div class="alert alert-success">
+        {{ subscribeMessage() }}
+    </div>
+    }
+</mat-card>
