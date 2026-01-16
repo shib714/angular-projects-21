@@ -9,10 +9,9 @@ import { MatListModule } from "@angular/material/list";
   selector: 'cart-list',
   standalone: true,
   template: `
-
-  @for (item of cartItems(); track item.vehicle.name) {
-     <cart-item [item]='item'></cart-item> 
-  }
+    @for (item of cartItems(); track item.vehicle.name) {
+      <cart-item [item]='item'></cart-item> 
+    }
   `,
   imports: [CommonModule, CartItemComponent, MatListModule]
 })

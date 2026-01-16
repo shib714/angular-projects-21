@@ -30,6 +30,11 @@ export class VehicleService {
     //convert vehicle$ to signal
     vehicles = toSignal(this.vehicles$, { initialValue: [] as Vehicle[] });
     selectedVehicle = signal<Vehicle | undefined>(undefined);
+    
+    vehicleSelected(vehicleName: string) {
+        const foundVehicle = this.vehicles().find((v) => v.name === vehicleName);
+        this.selectedVehicle.set(foundVehicle);
+    }
 
     vehicleFilms$ = toObservable(this.selectedVehicle).pipe(
         filter(Boolean),
@@ -42,10 +47,7 @@ export class VehicleService {
 
     vehicleFilms = toSignal<Film[], Film[]>(this.vehicleFilms$, { initialValue: [] });
 
-    vehicleSelected(vehicleName: string) {
-        const foundVehicle = this.vehicles().find((v) => v.name === vehicleName);
-        this.selectedVehicle.set(foundVehicle);
-    }
+
 
     private handleError(err: HttpErrorResponse): Observable<never> {
         // in a real world app, we may send the server to some remote logging infrastructure

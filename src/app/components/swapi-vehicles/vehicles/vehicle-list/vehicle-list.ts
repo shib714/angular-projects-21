@@ -19,7 +19,22 @@ import { VehicleDetailDialog } from '../vehicle-detail/vehicle-detail-dialog';
     MatButtonModule,
     MatToolbarModule,
   ],
-  templateUrl: './vehicle-list.html',
+  template: `
+  <h1 mat-title>{{pageTitle}}</h1>
+  <mat-list>
+      @for (vehicle of vehicles(); track vehicle.name) {
+      <mat-list-item (click)="onSelected(vehicle.name)" 
+          [ngClass]="{'active': vehicle?.name === (selectedVehicle())?.name}">
+          {{vehicle.name}}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      }
+
+  </mat-list>
+  @if (errorMessage) {
+  <div class="alert alert-danger">{{errorMessage }}</div>
+  }
+`,
   styles: `
   `,
 })
@@ -53,5 +68,4 @@ export class VehicleList {
       width: '400px',
     });
   }
-
 }

@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
   </div>
 </div>
   `,
-  styles: './debug-panel.scss',
+  styleUrl: './debug-panel.scss',
   imports: [CommonModule]
 })
 export class DebugPanel {

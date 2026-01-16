@@ -11,8 +11,26 @@ import { VehicleList } from './vehicle-list/vehicle-list';
   selector: 'sw-app',
   standalone: true,
   imports: [CommonModule, MatTabsModule,  MatBadgeModule, CartShell, VehicleList],
-  templateUrl: './vehicle-app.html',
-  styleUrls: ['./vehicle-app.scss']
+  template: `
+  <h2>{{pageTitle()}}</h2>
+  <div class="responsive-grid">
+      <div class="flex-row">
+          <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false" mat-align-tabs="start">
+              <mat-tab label="Vehicle List">
+                  <vehicle-list></vehicle-list>
+              </mat-tab>
+              <mat-tab>
+                  <ng-template mat-tab-label>
+                      <span matBadge="{{cartCount() > 0 ? cartCount() : '' }}" matBadgePosition="after"
+                          matBadgeOverlap="false" matBadgeColor="primary">Cart</span>
+                  </ng-template>
+                  <cart-shell />
+              </mat-tab>
+          </mat-tab-group>
+      </div>
+  </div>
+`,
+  styles: ``,
 })
 export class VehiclesApp {
   pageTitle = signal<string>('Star Wars Vehicle for Sales');
