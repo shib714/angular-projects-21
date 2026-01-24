@@ -1,4 +1,4 @@
-import { schema, customError, required, debounce, validate, validateHttp, validateAsync } from "@angular/forms/signals";
+import { schema, required, debounce, validate, validateHttp, validateAsync } from "@angular/forms/signals";
 import { UserService } from "./user.service";
 import { resource } from "@angular/core";
 
@@ -10,7 +10,7 @@ export const userNameSchema = (userService: UserService) => schema<{ userName: s
     // validate(rootPath.userName, ({ value }) => {
     //     const username = value();
     //     if (!username.includes(' ')) {
-    //         return customError({ kind: 'no-spaces', message: 'Name cannot contain spaces' });
+    //         return { kind: 'no-spaces', message: 'Name cannot contain spaces' };
     //     }
     //     return undefined;//no erroe
 
@@ -36,10 +36,10 @@ export const userNameSchema = (userService: UserService) => schema<{ userName: s
             }),
         onSuccess: (result: boolean) => {
             if (!result) {
-                return customError({
+                return {
                     kind: 'username_taken',
                     message: 'This username is already taken',
-                });
+                };
             }
             return null;
         },

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal, inject, OnInit } from "@angular/core";
-import { Field, form, submit } from "@angular/forms/signals";
+import { form, FormField, submit } from "@angular/forms/signals";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -19,7 +19,7 @@ import { ContactsService } from "../service/contacts.service";
 @Component({
     selector: 'contact-form',
     imports: [
-        Field,
+        FormField,
         FieldError,
         MatButtonModule,
         MatCardModule,

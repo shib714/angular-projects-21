@@ -1,4 +1,4 @@
-import { apply, applyWhen, customError, debounce, disabled, minLength, required, schema, validate, validateAsync, validateHttp } from "@angular/forms/signals";
+import { apply, applyWhen,  debounce, disabled, minLength, required, schema, validate, validateAsync, validateHttp } from "@angular/forms/signals";
 import { UserService } from "./user.service";
 import { environment } from "../../../../environments/env.dev";
 
@@ -63,9 +63,9 @@ const userNameSchema = schema<{ userName: string }>((rootPath) => {
             return value() ? `${environment.BASE_URL}?username=${value()}` : undefined
         },
         onSuccess: (users: any[]) =>
-            users.length > 0 ? customError({ kind: 'taken', message: 'This username is already taken' }) : undefined,
+            users.length > 0 ? { kind: 'taken', message: 'This username is already taken' } : undefined,
         onError: () =>
-            customError({ kind: 'server-error', message: 'Error checking availability' })
+            ({ kind: 'server-error', message: 'Error checking availability' })
     });
 
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { Field, form, submit } from '@angular/forms/signals';
+import { form, FormField, submit } from '@angular/forms/signals';
 import { Profile, defaultProfile, profileSchema } from '../profile';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,7 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'profile-form',
   imports: [
-    Field,
+    FormField,
     FieldError,
     MatButtonModule,
     MatCardModule,

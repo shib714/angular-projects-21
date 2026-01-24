@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Field, FieldTree } from '@angular/forms/signals';
+import { FormField, FieldTree } from '@angular/forms/signals';
 import { Address } from './address-form.model';
 import { ValidationErrors } from '../shared/validation/validation-errors';
 
@@ -11,17 +11,17 @@ import { ValidationErrors } from '../shared/validation/validation-errors';
         <h3>Shipping Address</h3>
             <div class="field-group">
                 <label>Street
-                    <input [field]="form().street"  type="text" />
+                    <input [formField]="form().street"  type="text" />
                     <validation-errors [fieldState]="form().street()" />
                 </label>
                 <div class="row">
-                    <label>City<input [field]="form().city"  type="text"/> 
+                    <label>City<input [formField]="form().city"  type="text"/> 
                         <validation-errors [fieldState]="form().city()" />
                     </label>
-                    <label>State<input [field]="form().state"  type="text" />
+                    <label>State<input [formField]="form().state"  type="text" />
                         <validation-errors [fieldState]="form().state()" />
                     </label>
-                    <label>ZIP<input [field]="form().zip"  type="text" />
+                    <label>ZIP<input [formField]="form().zip"  type="text" />
                         <validation-errors [fieldState]="form().zip()" />
                     </label>
                 </div>
@@ -29,7 +29,7 @@ import { ValidationErrors } from '../shared/validation/validation-errors';
     </div>  
   `,
     styles: ``,
-    imports: [Field, ValidationErrors],
+    imports: [FormField, ValidationErrors],
 })
 export class AddressForm {
 

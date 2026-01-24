@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Field, form, minLength, required, submit, ValidationError } from '@angular/forms/signals';
+import { form, FormField, minLength, required, submit, ValidationError } from '@angular/forms/signals';
 import { SignupModel, SignupService } from './signup.service';
 
 @Component({
     selector: 'form-submission-example',
-    imports: [CommonModule, Field],
+    imports: [CommonModule, FormField],
     template: `
     <div class="form-container">
   <h2>Sign up</h2>
@@ -17,7 +17,7 @@ import { SignupModel, SignupService } from './signup.service';
       <input
         id="username"
         type="text"
-        [field]="form.username" />
+        [formField]="form.username" />
       @if (form.username().touched() && form.username().invalid()) {
         <ul class="error-list">
           @for (err of form.username().errors(); track $index) {
@@ -32,7 +32,7 @@ import { SignupModel, SignupService } from './signup.service';
       <input
         id="email"
         type="email"
-        [field]="form.email" />
+        [formField]="form.email" />
       @if (form.email().touched() && form.email().invalid()) {
         <ul class="error-list">
           @for (err of form.email().errors(); track $index) {

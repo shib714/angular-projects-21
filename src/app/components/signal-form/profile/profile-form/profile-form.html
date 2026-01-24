@@ -7,7 +7,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>User Name</mat-label>
-                    <input id="userNameId" matInput [field]="profileForm.userName"
+                    <input id="userNameId" matInput [formField]="profileForm.userName"
                         placeholder="Please enter your user name" />
                     <mat-hint>User Name (required)</mat-hint>
                     @if(profileForm.userName().pending()) {
@@ -22,7 +22,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input id="firstNameId" matInput [field]="profileForm.firstName"
+                    <input id="firstNameId" matInput [formField]="profileForm.firstName"
                         placeholder="Please enter your first name" />
                     <mat-hint>First Name (required)</mat-hint>
                     <mat-error>
@@ -33,7 +33,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input id="lastNameId" matInput [field]="profileForm.lastName"
+                    <input id="lastNameId" matInput [formField]="profileForm.lastName"
                         placeholder="Please enter your last name" />
                     <mat-hint>Last Name (required)</mat-hint>
                     <mat-error>
@@ -44,7 +44,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Date of Birth</mat-label>
-                    <input id="dateOfBirthId" matInput [matDatepicker]="picker" [field]="profileForm.dateOfBirth"
+                    <input id="dateOfBirthId" matInput [matDatepicker]="picker" [formField]="profileForm.dateOfBirth"
                         placeholder="Please enter your date of birth" (dateChange)="onDateChange($event)" />
                     <mat-hint>Date of Birth (required)</mat-hint>
                     <mat-error>
@@ -57,7 +57,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input id="passwordId" matInput [field]="profileForm.password"
+                    <input id="passwordId" matInput [formField]="profileForm.password"
                         placeholder="Please enter your password" />
                     <mat-hint>Password (required)</mat-hint>
                     <mat-error>
@@ -69,7 +69,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Confirm password</mat-label>
-                    <input id="confirmPasswordId" matInput [field]="profileForm.confirmPassword"
+                    <input id="confirmPasswordId" matInput [formField]="profileForm.confirmPassword"
                         placeholder="Please confirm your password" />
                     <mat-hint>Confirm password (required)</mat-hint>
                     <mat-error>
@@ -80,7 +80,7 @@
             </div>
             <h2>Additional Information</h2>
             <div class="field-row">
-                <mat-checkbox id="sendViaEmailId" [field]="profileForm.hasEmergencyContact">
+                <mat-checkbox id="sendViaEmailId" [formField]="profileForm.hasEmergencyContact">
                     I have an emergency contact
                 </mat-checkbox>
 
@@ -88,7 +88,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Emergency Contact Name</mat-label>
-                    <input id="emergencyContactNameId" matInput [field]="profileForm.emergencyContactName"
+                    <input id="emergencyContactNameId" matInput [formField]="profileForm.emergencyContactName"
                         placeholder="Enter emergency contact name" />
                     <mat-hint>Emergency Contact Name (optional)</mat-hint>
                     <mat-error>
@@ -100,7 +100,7 @@
             <div class="field-row">
                 <mat-form-field appearance="outline">
                     <mat-label>Emergency Contact Phone</mat-label>
-                    <input id="emergencyContactPhoneId" matInput [field]="profileForm.emergencyContactPhone"
+                    <input id="emergencyContactPhoneId" matInput [formField]="profileForm.emergencyContactPhone"
                         placeholder="Enter emergency contact phone number" />
                     <mat-hint>Emergency Contact Phone (optional)</mat-hint>
                     <mat-error>

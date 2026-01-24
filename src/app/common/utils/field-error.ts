@@ -1,5 +1,5 @@
 import { Component, input, ChangeDetectionStrategy } from '@angular/core';
-import { Field, FieldState } from '@angular/forms/signals';
+import { FieldState } from '@angular/forms/signals';
 
 @Component({
   selector: 'field-error',

@@ -1,6 +1,6 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { initialData, Subscription, subscriptionSchema } from '../subscription';
-import { Field, form, submit} from '@angular/forms/signals';
+import { FormField, form, submit} from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'subscribe-form',
-  imports: [Field, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCheckboxModule],
+  imports: [FormField, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCheckboxModule],
   templateUrl: './subscribe-form.html',
   styleUrl: './subscribe-form.scss',
 })

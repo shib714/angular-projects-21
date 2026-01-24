@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Field, FieldTree } from '@angular/forms/signals';
+import { FormField, FieldTree } from '@angular/forms/signals';
 import { Preferences } from './preferences-form.model';
 import { ValidationErrors } from '../../shared/validation/validation-errors';
 
@@ -10,7 +10,7 @@ import { ValidationErrors } from '../../shared/validation/validation-errors';
      <h3>Preferences</h3>
     <div class="field-group">
         <label class="checkbox-label">
-        <input [field]="form().marketingOptIn" type="checkbox" />
+        <input [formField]="form().marketingOptIn" type="checkbox" />
         <validation-errors [fieldState]="form().marketingOptIn()" />
         <span>Receive marketing emails</span>
         </label>
@@ -18,7 +18,7 @@ import { ValidationErrors } from '../../shared/validation/validation-errors';
 </div>
   `,
   styles: ``,
-  imports: [Field, ValidationErrors],
+  imports: [FormField, ValidationErrors],
 })
 export class PreferencesForm {
 
