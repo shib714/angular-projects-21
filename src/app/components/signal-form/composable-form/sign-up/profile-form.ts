@@ -17,7 +17,9 @@ export interface Profile {
 @Component({
   selector: 'app-profile-form',
   template: `
+  <h1>Signal based Composable form</h1>
     <div class="container">
+      
       <form (submit)="onSubmit($event)">
         <account-form [form]='form.account' />
         <address-form  [form]='form.shippingAddress' />
