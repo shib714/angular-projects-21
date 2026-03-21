@@ -11,6 +11,7 @@ import { MatDatepickerModule, MatDatepickerInputEvent } from '@angular/material/
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FieldError } from '../../../../common/utils/field-error';
 import { UserService } from '../user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'profile-form',
@@ -24,6 +25,7 @@ import { UserService } from '../user.service';
     MatIconModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    CommonModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './profile-form.html',
